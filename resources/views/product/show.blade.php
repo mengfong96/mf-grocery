@@ -11,7 +11,7 @@
                     @foreach ($product as $p)
                         <p class="title">Details of {{$p->name}}</p>
                         <li>Name: {{$p->name}}</li>
-                        <li>Description:</li>
+                        <li>Description: {{$p->desc}}</li>
                         <li>Image:</li>
                         <li>Overview:</li>
                         <li>Category: TBC</li>

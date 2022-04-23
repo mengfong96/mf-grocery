@@ -17,18 +17,8 @@ class GroceryListProductController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $lists = $user->groceryList->products; //eloquent
-        return view('grocerylist.index', compact('lists'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $groceryLists = $user->groceryList->products;
+        return view('grocerylist.index', compact('groceryLists'));
     }
 
     /**
@@ -45,10 +35,20 @@ class GroceryListProductController extends Controller
         ]);
 
         $user = $request->user();
-        $groceryListId = $user->groceryList->id;
+        $groceryListId = $user->groceryList->id ?? null;
 
-        $list = GroceryList::find($groceryListId);
-        $list->products()->attach(
+        if(!$groceryListId) {
+            GroceryList::create([
+                'user_id'=>$user->id
+            ]);
+
+            $groceryListId = GroceryList::latest('id')->first()->id;
+        }
+        $groceryList = GroceryList::find($groceryListId);
+
+        // how if user already got that product in grocery list
+        // but adding it again in shopping list there?
+        $groceryList->products()->attach(
             $validated['product_id'],
             [
                 'quantity'=>$validated['quantity']
@@ -99,6 +99,16 @@ class GroceryListProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(GroceryListProduct $groceryListProduct)
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         //
     }

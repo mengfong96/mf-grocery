@@ -18,6 +18,9 @@ class ProductFactory extends Factory
     {
         return [
             'name'=> Str::random(16),
+            'image_path'=> Str::random(5).".png",
+            'desc'=> $this->faker->paragraph(),
+            'overview'=>$this->faker->sentence(),
         ];
     }
 }

@@ -7,18 +7,18 @@
             <div class="card">
                 <div class="card-header">{{ __('Grocery List') }}</div>
                 <div class="card-body">
-
-                        @foreach ($lists as $list)
+                    @if($groceryLists && !empty($groceryLists))
+                        @foreach ($groceryLists as $groceryList)
                         <ul>
-                            <li>Name: {{ $list->name }}</li>
-                            <li>Quantity: {{$list->pivot->quantity}}</li>
+                            <li>Name: {{ $groceryList->name }}</li>
+                            <li>Quantity: {{$groceryList->pivot->quantity}}</li>
                         </ul>
                         @endforeach
-
-                    {{--
-                        temporary just display what is in here.
-                            - this list will added from product details page
-                        --}}
+                    @else
+                        <p>
+                            Currently grocery list is empty. You can browse in shopping list and added product will be shown here!
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>
