@@ -17,7 +17,7 @@ class GroceryListProductController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $groceryLists = $user->groceryList->products;
+        $groceryLists = $user->groceryList->products ?? null;
         return view('grocerylist.index', compact('groceryLists'));
     }
 
