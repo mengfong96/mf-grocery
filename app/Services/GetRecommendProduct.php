@@ -10,7 +10,7 @@ class GetRecommendProduct {
         // change to array first
         // eg: Chicken breast
         $input = [
-            'selected_product'=> $productName
+            '"selected_product"'=> '"'.$productName.'"'
         ];
 
         // make it as a json
@@ -18,29 +18,21 @@ class GetRecommendProduct {
         // eg: {"selected_product":"Chicken breast"}
         $input = json_encode($input);
 
-        info($input);
-        die();
+        /**
+         * Sample output:
+         * [
+         *  "Chicken wings", "Chicken carcass", "Diced chicken",
+         *  "Chicken drumsticks", "Potato", "Curry leaf",
+         *  "Eggs", "Salmon", "Curry powder", "Onion"
+         * ]
+         */
         $output = shell_exec(
             "python $path $input"
         );
-        info('input;'.$productName);
-        /**
-         * Sample output:
-            1         Chicken breast
-            2     Chicken drumsticks
-            3        Chicken carcass
-            17         Diced chicken
-            18                Salmon
-            8                 Bhendi
-            16          Curry powder
-            15            Lemongrass
-            13                Garlic
-            9                Spinach
-            Name: Product_Name, dtype: object
-         */
-        info($output);
-        die();
-        return (int) trim($output);
+
+        // output is a json string, using json_decode will switch back to php array
+        // or else just give me back empty array
+        return json_decode($output) ?? [];
     }
 
 }

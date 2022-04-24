@@ -23,12 +23,9 @@ return new class extends Migration
         array_shift($outputArr);
 
         foreach($outputArr as $value) {
-            info($value[0]);//product name
-            info($value[1]);//product desc
-
             Product::create([
                 'name' => trim($value[0]),
-                'desc' => trim($value[1]),
+                'overview' => trim($value[1]),
             ]);
         }
     }

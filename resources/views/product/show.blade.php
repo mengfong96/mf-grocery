@@ -12,7 +12,7 @@
                     <li>Name: {{$product->name}}</li>
                     <li>Description: {{$product->desc}}</li>
                     <li>Image:</li>
-                    <li>Overview:</li>
+                    <li>Overview: {{$product->overview}}</li>
                     <li>Category: TBC</li>
                     <br>
                     <h4 class="title">Add to your grocery list</h4>
@@ -45,9 +45,10 @@
                         <h4 class="title">You might also like</h4>
                         <p>Recommender product to user</p>
 
-                        <p>List of photo hmm</p>
+                        @foreach ($productLists as $productList)
+                            <li>{{$productList}}</li>
+                        @endforeach
                     </div>
-
 
                     <hr>
                     <div>

@@ -22,7 +22,13 @@ indices
 # Content-based filtering
 # Function that takes in Product_Name as input and outputs most similar products
 def get_recommendations_similar_product(title, cosine_sim=cosine_sim):
-    print(title)
+
+    # passed as json because of limitation of sys.argv
+    # if title is "chicken breat", using sys.argv[1] will only get "chicken"
+    # right now the sys.argv[1] will get {"selected_product":"Chicken breast"}
+    title = json.loads(title)
+    title = title['selected_product']
+
     # Get the index of the products that matches the product
     idx = indices[title]
 
@@ -40,7 +46,20 @@ def get_recommendations_similar_product(title, cosine_sim=cosine_sim):
 
     # Return the top 10 most similar products
     # can use return
-    print(df_data['Product_Name'].iloc[product_indices])
+    # print(df_data['Product_Name'].iloc[product_indices])
+    return df_data['Product_Name'].iloc[product_indices]
 
-get_recommendations_similar_product(sys.argv[1])
+# run the function based on input json string
+result = get_recommendations_similar_product(sys.argv[1])
+
+# output: ['Chicken wings', 'Chicken carcass', 'Diced chicken',...]
+result = result.tolist()
+
+# convert back to json string
+result = json.dumps(result)
+
+# print result
+print(result)
+
+
 

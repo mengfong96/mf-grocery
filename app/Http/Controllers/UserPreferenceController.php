@@ -73,7 +73,7 @@ class UserPreferenceController extends Controller
             'user_pax' => 'required',
             'meal_num' => 'required',
         ]);
-        info($validated);
+
         $userPreference->update([
             'user_pax' => $request->user_pax,
             'meal_num' => $request->meal_num
@@ -81,36 +81,4 @@ class UserPreferenceController extends Controller
         return redirect(route('home'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UserPreference  $userPreference
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserPreference $userPreference)
-    {
-        //
-    }
-
-        /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserPreference  $userPreference
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserPreference $userPreference)
-    {
-        //
-    }
-
-        /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UserPreference  $userPreference
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserPreference $userPreference)
-    {
-        //
-    }
 }
