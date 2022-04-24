@@ -22,6 +22,20 @@ class GroceryListProductController extends Controller
     }
 
     /**
+     * Copy from yen's old proj
+     * Ignore this
+     * For reference purpose only
+     */
+    public function old()
+    {
+        $groceryLists = DB::table('grocerylist_products')
+        ->join('grocerylists', 'grocerylist_products.grocerylist_id', '=' ,'grocerylists.id')
+        ->get();
+        return $groceryLists;
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

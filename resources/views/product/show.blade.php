@@ -7,18 +7,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Product Details') }}</div>
                 <div class="card-body px-4">
-                    {{-- should have only 1 record dunno why is a array --}}
-                    @foreach ($product as $p)
-                        <p class="title">Details of {{$p->name}}</p>
-                        <li>Name: {{$p->name}}</li>
-                        <li>Description: {{$p->desc}}</li>
-                        <li>Image:</li>
-                        <li>Overview:</li>
-                        <li>Category: TBC</li>
-                    @endforeach
+
+                    <p class="title">Details of {{$product->name}}</p>
+                    <li>Name: {{$product->name}}</li>
+                    <li>Description: {{$product->desc}}</li>
+                    <li>Image:</li>
+                    <li>Overview:</li>
+                    <li>Category: TBC</li>
                     <br>
                     <h4 class="title">Add to your grocery list</h4>
-                    <p>Recommended Quantity: TBC</p>
+                    <p>Recommended Quantity: {{$quantity}}</p>
                     <form action="{{ route('grocery-lists.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
@@ -32,9 +30,7 @@
                             </select>
                         </div>
                         <div>
-                            @foreach ($product as $p)
-                                <input type="hidden" id="product_id" name="product_id" value="{{$p->id}}">
-                            @endforeach
+                            <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
                         </div>
                         <div class="py-2">
                             <button
@@ -58,7 +54,6 @@
                         <a
                             class="btn btn-primary"
                             href="{{ url()->previous() }}"
-                            style=""
                             >
                             Go back to shopping list
                         </a>

@@ -405,7 +405,7 @@
   ),
   'logging' => 
   array (
-    'default' => 'stack',
+    'default' => 'daily',
     'deprecations' => NULL,
     'channels' => 
     array (
